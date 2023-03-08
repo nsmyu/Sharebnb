@@ -1,0 +1,51 @@
+<div class="first-view">
+  <%= image_tag("first-view.jpg") %>
+  <h1>Sharebnbで<br>暮らすように旅をしよう</h1>
+  <%= form_with url: :search, method: :get do |f| %>
+    <div class="row g-3 justify-content-center first-view-search">
+      <div class="col-11">
+        <%= f.text_field :area, class: "form-control", placeholder: "エリア名を入力" %>
+      </div>
+      <div class="col-11">
+        <%= f.submit "検索", class: "button1" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="wrapper popular-areas-wrapper">
+  <h2>日本の人気エリア</h2>
+  <ul class="popular-areas">
+    <li>
+      <%= link_to(search_path(area: "東京")) do %>
+        <%= image_tag("tokyo.jpg") %>
+        <p>東京</p>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to(search_path(area: "大阪")) do %>
+        <%= image_tag("osaka.jpg") %>
+        <p>大阪</p>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to(search_path(area: "京都")) do %>
+        <%= image_tag("kyoto.jpg") %>
+        <p>京都</p>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to(search_path(area: "札幌")) do %>
+        <%= image_tag("sapporo.jpg") %>
+        <p>札幌</p>
+      <% end %>
+    <li>
+  </ul>
+</div>
+
+<% if flash[:notice] %>
+  <p class="alert alert-primary">
+    <%= flash[:notice] %>
+    <button type="button" class="close" data-bs-dismiss="alert">&times;</button>
+  </p>
+<% end %>

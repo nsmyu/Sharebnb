@@ -1,0 +1,17 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        name: ユーザー名
+        email: メールアドレス
+      room:
+        room_name: 施設名
+        description: 施設詳細
+        price: 一泊の料金
+        address: 住所
+      reservation:
+        check_in_on: チェックイン日
+        check_out_on: チェックアウト日
+        num_of_people: 人数
+
+

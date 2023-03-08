@@ -1,0 +1,97 @@
+<div class="wrapper index-wrapper">
+  <h2>予約済み</h2>
+  <% @reservations.each do |reservation| %>
+    <div class="content-box index-item">
+      <%= link_to [:room, id: reservation.room.id] do %>
+        <% if reservation.room.image.attached? %>
+         <%= image_tag reservation.room.image.variant(gravity: "center", resize:"581x335^", crop:"581x335+0+0").processed, class: "room-image"%>
+        <% else %>
+          <%= image_tag "default-room.png" %>
+        <% end %>
+      <% end %>
+      <div class="index-info-container">
+        <div class="index-header">
+        <%= link_to "#{reservation.room.room_name}", [:room, id: reservation.room.id], class: "room-name" %>
+          <div class="index-nav">
+            <span>予約確定日時 : <%= reservation.updated_at.strftime("%Y/%m/%d  %H:%M") %></span>
+            <div class="btn-group">
+              <button type="button" class="index-dropdown dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><button class="dropdown-item" type="button">
+                  <%= link_to "予約の変更", [:edit_reservation, id:reservation.id] %>
+                </li>
+                <li>
+                  <button class="dropdown-item btn-delete" data-bs-toggle="modal" data-bs-target="#reservation-modal-<%= reservation.id %>">
+                    予約キャンセル
+                  </button>
+                </li>
+              </ul>
+              <div class="modal fade" id="reservation-modal-<%= reservation.id %>" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h3 class="modal-title">こちらの予約をキャンセルしますか？</h3>
+                    </div>
+                    <div class="modal-body">
+                      <div class="modal-room-info">
+                        <div>
+                          <% if reservation.room.image.attached? %>
+                            <%= image_tag reservation.room.image.variant(gravity: "center", resize:"581x335^", crop:"581x335+0+0").processed, class: "room-image"%>
+                          <% else %>
+                            <%= image_tag "default-room.png" %>
+                          <% end %>
+                        </div>
+                        <div>
+                          <p class="room-name"><%= reservation.room.room_name %></p>
+                          <p><%= reservation.check_in_on.strftime("%Y/%m/%d") %>〜<%= reservation.check_out_on.strftime("%Y/%m/%d") %></p>
+                          <p><%= reservation.num_of_people %>名</p>
+                          <p><%= converting_to_jpy(reservation.room.price) %><span> /1泊</span></p>
+                        </div>
+                      </div>
+                      <p class="modal-instruction">よろしければ以下の「予約キャンセル」を押してください</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="button2" data-bs-dismiss="modal">戻る</button>
+                      <%= link_to "予約キャンセル", reservation, method: :delete, class: "button1" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row index-body">
+          <div class="col-9">
+            <p class="reservation-date">
+              <span>チェックイン </span><%= reservation.check_in_on.strftime("%Y/%m/%d") %>&nbsp;&nbsp;&nbsp;&nbsp;
+              <span>チェックアウト </span><%= reservation.check_out_on.strftime("%Y/%m/%d") %></p>
+            <p class="room-description reservation-room-description"><%= reservation.room.description %></p>
+          </div>
+          <div class="col-3">
+            <p class="room-price">
+              <span class="total-price">
+                <%= reservation.num_of_people %>名・<%= (reservation.check_out_on - reservation.check_in_on).to_i %>泊<br>お支払い金額
+              </span>
+              <%= converting_to_jpy(reservation.total_price.to_i) %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<% if flash[:alert] %>
+  <p class="alert alert-danger">
+    <%= flash[:alert] %>
+    <button type="button" class="close" data-bs-dismiss="alert">&times;</button>
+  </p>
+<% end %>
+
+<% if flash[:notice] %>
+  <p class="alert alert-primary">
+    <%= flash[:notice] %>
+    <button type="button" class="close" data-bs-dismiss="alert">&times;</button>
+  </p>
+<% end %>

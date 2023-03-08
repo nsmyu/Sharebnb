@@ -1,0 +1,66 @@
+<%= form_with model: @room do |f| %>
+  <table>
+    <tr>
+      <th><%= f.label :room_name,"施設名", class: "mandatory-field" %></th>
+      <td>
+        <%= f.text_field :room_name, placeholder: "施設名を入力" %>
+        <% if @room.errors.any? %>
+          <div class="field-alert">
+            <%= @room.errors.full_messages_for(:room_name).first %>
+          </div>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th><%= f.label :description,"施設詳細", class: "mandatory-field" %></th>
+      <td>
+        <%= f.text_area :description, placeholder: "施設詳細を入力" %>
+        <% if @room.errors.any? %>
+          <div class="field-alert">
+            <%= @room.errors.full_messages_for(:description).first %>
+          </div>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th><%= f.label :price,"料金", class: "mandatory-field" %></th>
+      <td>
+        <%= f.number_field :price, placeholder: "一泊の料金を入力" %>
+        <% if @room.errors.any? %>
+          <div class="field-alert">
+            <%= @room.errors.full_messages_for(:price).first %>
+          </div>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th><%= f.label :address,"住所", class: "mandatory-field" %></th>
+      <td><%= f.text_field :address, placeholder: "住所を入力" %>
+        <% if @room.errors.any? %>
+          <div class="field-alert">
+            <%= @room.errors.full_messages_for(:address).first %>
+          </div>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th><%= f.label :image,"施設画像"%></th>
+      <td>
+        <label type="button" class="label-for-file-field">画像をアップロード
+        <%= f.file_field :image, class: "file-field" %>
+      </td>
+    </tr>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+  </table>
+  <div class="table-btn-group">
+    <%= f.submit "保存", class: "button1" %>
+    <%= link_to "キャンセル", :back, class: "button2"%>
+  </div>
+<% end %>
+
+<% if flash[:alert] %>
+  <p class="alert alert-danger">
+    <%= flash[:alert] %>
+    <button type="button" class="close" data-bs-dismiss="alert">&times;</button>
+  </p>
+<% end %>

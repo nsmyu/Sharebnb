@@ -1,0 +1,32 @@
+<div class="wrapper">
+  <h2>アカウント設定</h2>
+  <div class="row user-info-wrapper">
+    <div class="col-3 user-side-nav">
+      <%= link_to "アカウント", :users_account, class: "link-to-account" %>
+      <%= link_to "プロフィール", :users_profile %>
+    </div>
+    <div class="col-9 user-info-container">
+      <div class="user-info-header">
+        <h3>アカウント</h3>
+        <%= link_to "編集", :edit_user_registration %>
+      </div>
+      <table class="user-info-table">
+        <tr>
+          <th>メールアドレス</th>
+          <td><%= @user.email %></td>
+        </tr>
+        <tr>
+          <th>パスワード</th>
+          <td>*********</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<% if flash[:notice] %>
+  <p class="alert alert-primary">
+    <%= flash[:notice] %>
+    <button type="button" class="close" data-bs-dismiss="alert">&times;</button>
+  </p>
+<% end %>

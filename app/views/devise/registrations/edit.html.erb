@@ -1,0 +1,98 @@
+<div class="wrapper">
+  <h2>アカウント設定</h2>
+  <div class="row user-info-wrapper">
+    <div class="col-3 user-side-nav">
+      <%= link_to "アカウント", :users_account, class: "link-to-account" %>
+      <%= link_to "プロフィール", :users_profile %>
+    </div>
+    <div class="col-9 user-info-container">
+      <div class="user-info-header">
+        <h3>アカウント</h3>
+      </div>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <table class="user-info-table">
+          <tr>
+            <th><%= f.label :email, "メールアドレス" %></th>
+            <td>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+              <% if resource.errors.any? %>
+                <div class="field-alert">
+                  <%= resource.errors.full_messages_for(:email).first %>
+                </div>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <%= f.label :password %><br><span class="user-edit-note">＊変更する場合のみ、半角英数字6文字以上</span>
+            </th>
+            <td>
+              <%= f.password_field :password, autocomplete: "new-password", placeholder: "新しいパスワードを入力" %>
+              <% if resource.errors.any? %>
+                <div class="field-alert">
+                  <%= resource.errors.full_messages_for(:password).first %>
+                </div>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <%= f.label :password_confirmation %><br><span class="user-edit-note">＊変更する場合のみ、半角英数字6文字以上</span>
+            </th>
+            <td>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "新しいパスワードを入力" %>
+              <% if resource.errors.any? %>
+                <div class="field-alert">
+                  <%= resource.errors.full_messages_for(:password_confirmation).first %>
+                </div>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <th><%= f.label :current_password %></th>
+            <td>
+              <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "現在のパスワードを入力" %>
+              <% if resource.errors.any? %>
+                <div class="field-alert">
+                  <%= resource.errors.full_messages_for(:current_password).first %>
+                </div>
+              <% end %>
+            </td>
+          </tr>
+        </table>
+        <div>
+          <div class="user-btn-group">
+            <%= link_to "キャンセル", :users_account, class: "button2" %>
+            <%= f.submit "保存", class: "button1" %>
+          </div>
+          <div class="btn-delete-account">
+            <a class="btn-delete" data-bs-toggle="modal" data-bs-target="#user-modal">アカウント削除</a>
+          </div>
+            <div class="modal fade" id="user-modal" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3 class="modal-title">アカウントを削除しますか？</h3>
+                  </div>
+                  <div class="modal-body">
+                    <p class="modal-instruction">よろしければ以下の「削除」を押してください</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="button2" data-bs-dismiss="modal">キャンセル</button>
+                    <%= link_to "削除", registration_path(resource_name), method: :delete, class: "button1" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% if flash[:alert] %>
+  <p class="alert alert-danger">
+    <%= flash[:alert] %>
+    <button type="button" class="close" data-bs-dismiss="alert">&times;</button>
+  </p>
+<% end %>

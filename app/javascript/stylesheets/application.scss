@@ -1,0 +1,692 @@
+@import "~bootstrap/scss/bootstrap.scss";
+
+//共通のスタイル
+a {
+  text-decoration: none;
+}
+li {
+  list-style: none;
+}
+ul, li, h1, h2, h3, p {
+  margin: 0;
+  padding: 0;
+}
+h2 {
+  margin-bottom: 25px;
+  font-size: 28px;
+}
+h3 {
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+input, textarea {
+  padding: 12px;
+  width: 100%;
+  height: 50px;
+  font-size: 14px !important;
+  border: 1px solid #c0c0c0;
+  border-radius: 3px;
+}
+.mandatory-field::after {
+  content: '';
+  display: inline-block;
+  position: relative;
+  top: -4px;
+  margin-left: 3px;
+  width: 8px;
+  height: 8px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' fill='%23ff0000' viewBox='0 0 16 16'%3E%3Cpath d='M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z'/%3E%3C/svg%3E");
+}
+.button1 {
+  width: 100%;
+  color: white;
+  font-size: 16px !important;
+  font-weight: 700;
+  background-color: #F76F6D;
+  border: none !important;
+  border-radius: 5px;
+  box-shadow: 0 1.5px 2px 1px rgba(0, 0, 0, 0.2);
+}
+.button2 {
+  display: block;
+  padding: 12px;
+  text-align: center;
+  color: #F76F6D;
+  background-color: white;
+  font-size: 16px;
+  border: 1px solid #F76F6D;
+  border-radius: 5px;
+}
+.content-box {
+  padding: 30px;
+  box-shadow: 0 0 4px 3px rgba(0, 0, 0, 0.2);
+}
+table {
+  margin-top: 25px;
+  width: 100%;
+  th{
+    padding-bottom: 22px;
+    width: 25%;
+    line-height: 18px;
+  }
+  td {
+    padding-bottom: 22px;
+  }
+  textarea {
+    height: 120px;
+  }
+  .file-field {
+    display: none;
+  }
+  .label-for-file-field {
+    padding: 10px 40px;
+    height: fit-content;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid #c0c0c0;
+    border-radius: 5px;
+    &:before {
+      content: '';
+      display: inline-block;
+      position: relative;
+      top: 3px;
+      margin-right: 10px;
+      width: 16px;
+      height: 16px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' class='bi bi-upload' viewBox='0 0 16 16'%3E%3Cpath d='M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z'/%3E%3Cpath d='M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z'/%3E%3C/svg%3E");
+    }
+  }
+}
+.wrapper {
+  margin: 40px auto 180px;
+  max-width: 1350px;
+  font-family: YuGothic,'Yu Gothic',sans-serif;
+}
+//ヘッダーのスタイル
+header {
+  background-color: #04BFBF;
+}
+.header-wrapper {
+  z-index: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 15px 0;
+  height: 80px;
+  .header-logo {
+    color: white;
+    font-family: 'Hannotate TC',sans-serif;
+    font-size: 38px;
+  }
+}
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  background-color: #FFFAFA;
+  border: none;
+  border-radius: 50px;
+  .user-avatar{
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+  }
+  p {
+    margin: 0 6px 0 15px;
+    font-size: 16px;
+  }
+}
+.dropdown-menu a {
+  color: #606060 !important;
+  font-size: 14px !important;
+}
+.signed-out-nav {
+  display: flex;
+  a {
+    display: inline-block;
+    align-items: center;
+    padding: 8px 15px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .btn-sign-up {
+    margin-left: 15px;
+    border: 1px solid white;
+    border-radius: 50px;
+  }
+}
+
+//フッターのスタイル
+footer {
+  padding-top: 100px;
+  height: 400px;
+  color: white;
+  background-color: #04BFBF;
+  .footer-wrapper {
+    margin: 0 auto;
+  }
+  .footer-logo {
+    color: white;
+    font-family: 'Hannotate TC',sans-serif;
+    font-size: 38px;
+  }
+}
+
+//トップページのスタイル
+.first-view {
+  position: relative;
+  img {
+    width: 100%;
+  }
+  h1 {
+    position: absolute;
+    top: 18%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: white;
+    font-size: 60px;
+  }
+}
+.first-view-search {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 14px 0 30px;
+  background-color: rgb(255, 255, 255, 0.3);
+  width: 45%;
+  text-align: center;
+}
+.popular-areas-wrapper {
+  margin-top: 100px;
+  width: fit-content;
+  h2 {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  .popular-areas {
+    display: flex;
+    padding: 0;
+    text-align: center;
+    img {
+      margin: 0 40px;
+      width: 230px;
+      border-radius: 50%;
+    }
+    p {
+      padding-top: 20px;
+      color: black;
+      font-size: 18px;
+    }
+  }
+}
+
+//ログインページ、新規登録ページのスタイル
+.sign-in-wrapper, .sign-up-wrapper {
+  width: 500px;
+  color: #606060;
+  font-weight: 600;
+  h2 {
+    text-align: center;
+  }
+  form {
+    margin-top: 30px;
+    font-size: 14px;
+  }
+  input{
+    margin-top: 3px;
+  }
+  .button2 {
+    color: #F76F6D;
+  }
+}
+
+//アカウント設定ページの共通スタイル
+.user-info-wrapper {
+  margin: 0 auto;
+  width: 100%;
+}
+.user-side-nav {
+  padding: 0;
+  height: fit-content;
+  border: 1px solid #c0c0c0;
+  a {
+    display: block;
+    padding: 20px;
+    color: #606060;
+  }
+  .link-to-account {
+    border-bottom: 1px solid #c0c0c0;
+  }
+  .current {
+    color: #F76F6D;
+  }
+}
+.user-info-container {
+  padding-left: 40px;
+}
+.user-info-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #c0c0c0;
+  a {
+    font-size: 18px;
+    &:before {
+      content: '';
+      display: inline-block;
+      position: relative;
+      top: 2.5px;
+      margin-right: 10px;
+      width: 18px;
+      height: 18px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%230d6efd' class='bi bi-pencil-fill' viewBox='0 0 16 16'%3E%3Cpath d='M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z'/%3E%3C/svg%3E");
+    }
+  }
+}
+.user-info-table {
+  .user-edit-note {
+    font-size: 11px;
+    font-weight: normal;
+  }
+  .table-image {
+    display: flex;
+  }
+  img {
+    border-radius: 50%;
+  }
+  .label-for-file-field {
+    margin: auto 0 auto 35px;
+  }
+}
+.user-btn-group {
+  display: flex;
+  float: right;
+  margin-bottom: 10px;
+  width: 100%;
+  .button1 {
+    margin-left: 18px;
+    width: 15%;
+  }
+  .button2 {
+    margin-left: auto;
+    width: 15%;
+    color: #F76F6D;
+  }
+}
+.btn-delete-account {
+  text-align: right;
+  a {
+    color: #606060;
+    font-size: 14px;
+  }
+}
+
+//施設新規登録・編集ページのスタイル
+.room-form-container {
+  margin: 0 auto;
+  width: 700px;
+}
+.table-btn-group {
+  .button1 {
+    margin-bottom: 15px;
+  }
+  .button2 {
+    color: #F76F6D;
+  }
+}
+
+//施設情報の共通スタイル
+.room-name {
+  color: black;
+  font-size: 26px;
+  font-weight: 600;
+}
+.room-address {
+  color: #606060;
+  font-size: 14px;
+}
+.room-price {
+  color: #F76F6D;
+  font-size: 26px;
+  font-weight: 600;
+  span {
+    color: #606060;
+    font-size: 14px;
+    font-weight: normal;
+  }
+}
+.room-description {
+  color: #606060;
+  font-size: 16px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+.five-stars {
+  width: fit-content;
+}
+
+//施設詳細＋予約フォームページのスタイル
+.room-info-btn-group {
+  display: flex;
+  justify-content: space-between;
+}
+.btn-to-previous-page {
+  font-size: 18px;
+  &:before {
+    content: '';
+    display: inline-block;
+    position: relative;
+    top: 2.5px;
+    margin-right: 6px;
+    width: 18px;
+    height: 18px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%230d6efd' class='bi bi-arrow-left' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z'/%3E%3C/svg%3E");
+  }
+}
+.btn-to-edit {
+  font-size: 18px;
+  &:before {
+    content: '';
+    display: inline-block;
+    position: relative;
+    top: 2.5px;
+    margin-right: 6px;
+    width: 18px;
+    height: 18px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%230d6efd' class='bi bi-pencil-fill' viewBox='0 0 16 16'%3E%3Cpath d='M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z'/%3E%3C/svg%3E");
+  }
+}
+.room-info-wrapper {
+  margin: 0 auto;
+  .col-5 {
+    margin-top: 12px;
+    padding-left: 0;
+  }
+  .col-7 {
+    margin-top: 12px;
+    padding-right: 0;
+  }
+  img {
+    width: 100%;
+  }
+}
+.room-detailed-info {
+  margin-top: 0;
+  .room-info-header {
+    display: flex;
+    justify-content: space-between;
+    vertical-align: bottom;
+  }
+  .room-description {
+    margin: 30px 0 20px;
+  }
+}
+.reservation-form {
+  margin: 5px;
+  padding: 10px 22px 22px;
+  background-color: #EEEEEE;
+  input {
+    border: none;
+  }
+  .form-label {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .button1 {
+    margin-top: 10px;
+  }
+}
+
+//予約フォームのカレンダーのスタイル（日曜日：赤、土曜日：青）
+.flatpickr-calendar .flatpickr-innerContainer .flatpickr-weekdays .flatpickr-weekday:nth-child(7n + 1),
+.flatpickr-calendar .flatpickr-innerContainer .flatpickr-days .flatpickr-day:not(.flatpickr-disabled):not(.prevMonthDay):not(.nextMonthDay):nth-child(7n + 1) {
+  color: red;
+}
+.flatpickr-calendar .flatpickr-innerContainer .flatpickr-weekdays .flatpickr-weekday:nth-child(7),
+.flatpickr-calendar .flatpickr-innerContainer .flatpickr-days .flatpickr-day:not(.flatpickr-disabled):not(.prevMonthDay):not(.nextMonthDay):nth-child(7n) {
+  color: blue;
+}
+
+//施設検索結果一覧ページのスタイル
+.search-reselt-count {
+  span {
+    font-weight: 600;
+  }
+}
+.search-result-item {
+  margin-top: 20px;
+  padding: 25px;
+  border-radius: 10px;
+  img {
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  .room-address {
+    margin-bottom: 3px;
+  }
+  .room-description {
+    height: 70px;
+  }
+}
+.room-info-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  .room-price {
+    margin: auto 0 0;
+  }
+  .button1 {
+    display: inline-block;
+    padding: 12px 20px;
+    color: white;
+    &:after {
+      content: '';
+      display: inline-block;
+      position: relative;
+      top: 2.5px;
+      margin-left: 10px;
+      width: 16px;
+      height: 16px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23ffffff' class='bi bi-chevron-right' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+    }
+  }
+}
+
+//施設検索パーシャルのスタイル
+.search {
+  padding: 30px 0;
+  width: 100%;
+  color: #606060;
+  font-size: 14px;
+  background-color: #EEEEEE;
+  form {
+    margin: 0 auto;
+    width: 60%;
+  }
+  input {
+    border: none;
+  }
+  .button1 {
+    box-shadow: none;
+  }
+  .multiply {
+    font-size: 30px;
+    width: fit-content;
+  }
+}
+
+//掲載中の施設一覧、予約一覧ページのスタイル
+.index-wrapper {
+  width: 80%;
+}
+.index-item {
+  display: flex;
+  margin-bottom: 25px;
+  padding: 20px;
+  img {
+    width: 210px;
+  }
+}
+.index-info-container {
+  margin-left: 20px;
+  width: 100%;
+}
+.index-header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 3px;
+  margin-bottom: 8px;
+  font-size: 16px;
+  border-bottom: 1px solid #c0c0c0;
+  .index-nav {
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 2px;
+  }
+  .index-dropdown {
+    padding: 0;
+    margin: 0 0 4px 5px;
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23a0a0a0' class='bi bi-three-dots-vertical' viewBox='0 0 16 16'%3E%3Cpath d='M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    &:after {
+      display: none;
+    }
+  }
+  .btn-delete {
+    color: #F76F6D !important;
+    font-size: 14px;
+  }
+}
+.index-body {
+  display: flex;
+  .reservation-date {
+    color: #F76F6D;
+    font-size: 16px;
+    span {
+      font-weight: 600;
+    }
+  }
+  .room-description {
+    font-size: 15px;
+  }
+  .reservation-room-description {
+    margin-top: 5px;
+  }
+  .col-3 {
+    text-align: right;
+  }
+  .total-price {
+    display: block;
+  }
+}
+
+//予約確認、編集ページのスタイル
+.reservation-table-container {
+  margin: 0 auto;
+  width: 700px;
+}
+.confirmation-container {
+  td {
+    text-align: right;
+  }
+  input {
+    padding: 0;
+    text-align: right;
+    height: fit-content;
+    font-size: 16px !important;
+    border: none;
+  }
+  .button1 {
+    margin-top: 10px;
+    text-align: center;
+    height: 50px;
+  }
+}
+
+//予約確認、編集ページの施設情報パーシャルのスタイル
+.room-info-card {
+  display: flex;
+  margin-top: 25px;
+  padding: 15px;
+  img {
+    width: 160px;
+  }
+  .room-brief-info {
+    margin-left: 18px;
+  }
+  .room-name {
+    font-size: 22px;
+  }
+  .room-address {
+    margin: 0;
+  }
+  .room-price {
+    margin: 10px 0 0;
+    font-size: 20px;
+    span {
+      font-size: 14px;
+    }
+  }
+}
+
+//モーダルのスタイル
+.modal-content {
+  margin-left: -50px;
+  padding: 10px;
+  width: 600px;
+  .modal-room-info {
+    display: flex;
+    img {
+      width: 140px;
+      margin-right: 20px;
+    }
+  }
+  .modal-header, .modal-footer {
+    border: none;
+  }
+  .room-name {
+    color: black;
+    font-size: 18px;
+  }
+  .modal-instruction {
+    margin-top: 30px;
+  }
+  .modal-footer {
+    display: flex;
+    padding-top: 0;
+  }
+  .button1 {
+    width: fit-content;
+    padding: 12px 20px;
+    color: white;
+  }
+}
+
+//エラーメッセージのスタイル
+.field-alert {
+  padding-top: 2px;
+  color: red;
+  font-size: 12px;
+  font-weight: normal;
+}
+.alert {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-block;
+  font-size: 15px;
+  .close {
+    margin-left: 3px;
+    border: none;
+    background-color: transparent;
+  }
+}

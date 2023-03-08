@@ -1,0 +1,64 @@
+<div class="wrapper">
+  <h2>アカウント設定</h2>
+  <div class="row user-info-wrapper">
+    <div class="col-3 user-side-nav">
+      <%= link_to "アカウント", :users_account, class: "link-to-account" %>
+      <%= link_to "プロフィール", :users_profile %>
+    </div>
+    <div class="col-9 user-info-container">
+      <div class="user-info-header">
+        <h3>プロフィール</h3>
+      </div>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <table class="user-info-table">
+          <tr>
+            <th><%= f.label :avatar, "アイコン" %></th>
+            <td class="table-image">
+              <% if @user.avatar.attached? %>
+                <%= image_tag @user.avatar.variant(gravity: "center", resize:"80x80^", crop:"80x80+0+0").processed, class: "user-avatar"%>
+              <% else %>
+                <%= image_tag "default-avatar.png" %>
+              <% end %>
+              <label type="button" class="label-for-file-field">画像をアップロード
+                <%= f.file_field :avatar, class: "file-field" %>
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <th><%= f.label :name, "お名前" %></th>
+            <td>
+              <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "ユーザー名を入力" %>
+              <% if resource.errors.any? %>
+                <div class="field-alert">
+                  <%= resource.errors.full_messages_for(:name).first %>
+                </div>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <th><%= f.label :introduction, "自己紹介" %><br><span class="user-edit-note">＊250文字以内</span></th>
+            <td>
+              <%= f.text_area :introduction, autofocus: true, placeholder: "自己紹介を入力" %>
+              <% if resource.errors.any? %>
+                <div class="field-alert">
+                  <%= resource.errors.full_messages_for(:introduction).first %>
+                </div>
+              <% end %>
+            </td>
+          </tr>
+        </table>
+        <div class="user-btn-group">
+          <%= link_to "キャンセル", :users_profile, class: "button2" %>
+          <%= f.submit "保存", class: "button1" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% if flash[:alert] %>
+  <p class="alert alert-danger">
+    <%= flash[:alert] %>
+    <button type="button" class="close" data-bs-dismiss="alert">&times;</button>
+  </p>
+<% end %>

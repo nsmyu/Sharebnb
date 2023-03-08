@@ -1,0 +1,44 @@
+<div class="wrapper">
+  <h2>アカウント設定</h2>
+  <div class="row user-info-wrapper">
+    <div class="col-3 user-side-nav">
+      <%= link_to "アカウント", :users_account, class: "link-to-account" %>
+      <%= link_to "プロフィール", :users_profile %>
+    </div>
+    <div class="col-9 user-info-container">
+      <div class="user-info-header">
+        <h3>プロフィール</h3>
+        <%= link_to "編集", :users_profile_edit %>
+      </div>
+      <table class="user-info-table">
+        <tr>
+          <th>アイコン</th>
+          <td>
+            <% if @user.avatar.attached? %>
+              <%= image_tag @user.avatar.variant(gravity: "center", resize:"80x80^", crop:"80x80+0+0").processed, class: "user-avatar"%>
+            <% else %>
+              <%= image_tag "default-avatar.png" %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th>お名前</th>
+          <td><%= @user.name %></td>
+        </tr>
+        <tr>
+          <th>自己紹介</th>
+          <td><%= @user.introduction %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<% if flash[:notice] %>
+  <p class="alert alert-primary">
+    <%= flash[:notice] %>
+    <button type="button" class="close" data-bs-dismiss="alert">&times;</button>
+  </p>
+<% end %>
+
+
