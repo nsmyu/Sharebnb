@@ -1,0 +1,39 @@
+<div class="wrapper">
+  <div class="reservation-table-container confirmation-container">
+    <h3>予約内容をご確認ください</h3>
+    <%= render "shared/room_info_card" %>
+    <%= form_with model: @reservation, url: :register_reservation, id: @reservation.id, method: :put do |f| %>
+      <table>
+        <tr>
+          <th>チェックイン</th>
+          <td><%= f.date_field :check_in_on, value: @reservation.check_in_on, id: "flatpickr", readonly: true %></td>
+        </tr>
+        <tr>
+          <th>チェックアウト</th>
+          <td><%= f.date_field :check_out_on, value: @reservation.check_out_on, id: "flatpickr", readonly: true %></td>
+        </tr>
+        <tr>
+          <th>日数</th>
+          <td><%= (@reservation.check_out_on - @reservation.check_in_on).to_i %>泊</td>
+        </tr>
+        <tr>
+          <th>人数</th>
+          <td><%= @reservation.num_of_people %>名</td>
+          <%= f.hidden_field :num_of_people, value: @reservation.num_of_people %>
+        </tr>
+        <tr>
+          <th>お支払い金額</th>
+          <td><%= converting_to_jpy(@reservation.total_price.to_i) %></td>
+        </tr>
+        <%= f.hidden_field :id, value: @reservation.id %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.hidden_field :room_id, value: @reservation.room.id %>
+      </table>
+      <p>上記内容でお間違いなければ、「確定」を押してください</p>
+      <div class="table-btn-group">
+        <%= f.submit "確定", class: "button1" %>
+        <%= link_to "キャンセル", :back, class: "button2"%>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<%= render "shared/search" %>
+<div class="wrapper">
+  <h3 class="search-result-count">
+    <%= @area == "" ? "" : "#{@area} : " %>
+    <span><%= @rooms.count  == 0 ? "0" : "#{@rooms.count}" %></span> 件のお部屋が見つかりました
+  </h3>
+  <div class="row g-4">
+    <% @rooms.each do |room| %>
+      <div class="col-4">
+        <ul class="search-result-item content-box">
+          <li>
+            <% if room.image.attached? %>
+              <%= image_tag room.image.variant(gravity: "center", resize:"581x335^", crop:"581x335+0+0").processed %>
+            <% else %>
+              <%= image_tag "default-room.png" %>
+            <% end %>
+          </li>
+          <li class="room-name"><%= room.room_name %></li>
+          <li class="room-address"><%= room.address %></li>
+          <li class="five-stars"> <%= image_tag "five-stars.png" %></li>
+          <li class="room-description"><%= room.description %></li>
+          <div class="room-info-footer">
+            <li class="room-price"><%= converting_to_jpy(room.price.to_i) %><span> /1泊</span></li>
+            <li><%= link_to "詳細はこちら", [:room, id: room.id], class: "button1" %></li>
+          </div>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+

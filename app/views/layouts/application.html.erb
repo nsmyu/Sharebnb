@@ -6,11 +6,77 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   </head>
 
   <body>
+    <header>
+      <div class="wrapper header-wrapper">
+        <%= link_to "Sharebnb", :root, class: "header-logo" %>
+        <% if user_signed_in? %>
+          <div class="btn-group">
+            <button type="button" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              <div class="dropdown-user-avatar">
+                <% if current_user.avatar.attached? %>
+                  <%= image_tag current_user.avatar.variant(gravity: "center", resize:"44x44^", crop:"44x44+0+0").processed, class: "user-avatar"%>
+                <% else %>
+                  <%= image_tag "default-avatar-small.png" %>
+                <% end %>
+              </div>
+              <p><%= current_user.name %></p>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <button class="dropdown-item"><%= link_to "新しい施設を登録する", :new_room %></button>
+              </li>
+              <li>
+                <button class="dropdown-item"><%= link_to "掲載中の施設一覧", :rooms %></button>
+              </li>
+              <li>
+                <button class="dropdown-item"><%= link_to "予約の確認", :reservations %></button>
+              </li>
+              <li>
+                <button class="dropdown-item"><%= link_to "アカウント設定", :users_account %></button>
+              </li>
+              <li>
+                <button class="dropdown-item"><%= link_to "ログアウト", :destroy_user_session, method: :delete %></button>
+              </li>
+            </ul>
+          </div>
+        <% else %>
+          <ul class="signed-out-nav">
+            <li><%= link_to "SIGN IN", :new_user_session %></li>
+            <li><%= link_to "SIGN UP", :new_user_registration, class: "btn-sign-up" %></li>
+          </ul>
+        <% end %>
+      </div>
+    </header>
     <%= yield %>
+    <footer>
+      <div class="wrapper footer-wrapper">
+        <%= link_to "Sharebnb", :root, class: "footer-logo" %>
+        <p>Copyright © Potepan Share 2023 All rights reserved</p>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+      flatpickr("#flatpickr", {
+        altInput: true,
+        altFormat: 'Y/n/j',
+        dateFormat: 'Y-m-d'
+      });
+
+      document.addEventListener("turbolinks:load", function() {
+        if((location.href === "http://localhost:3000/users/account") || (location.href === "http://localhost:3000/users/edit")) {
+          document.querySelectorAll(".user-side-nav > a")[0].classList.add("current");
+        }
+        if((location.href === "http://localhost:3000/users/profile") || (location.href === "http://localhost:3000/users/profile/edit")) {
+          document.querySelectorAll(".user-side-nav > a")[1].classList.add("current");
+        }
+      });
+    </script>
   </body>
 </html>

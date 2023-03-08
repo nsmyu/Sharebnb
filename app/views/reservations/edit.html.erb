@@ -1,0 +1,51 @@
+<div class="wrapper">
+  <div class="reservation-table-container">
+    <h3>変更内容をご入力ください</h3>
+    <%= render "shared/room_info_card" %>
+    <%= form_with model: @reservation, url: :confirm_reservation, method: :get do |f| %>
+      <table>
+        <tr>
+          <th><%= f.label :check_in_on, "チェックイン", class: "form-label mandatory-field" %></th>
+          <td>
+            <%= f.date_field :check_in_on, value: @reservation.check_in_on, id: "flatpickr", placeholder: "---- / -- / --" %>
+            <% if @reservation.errors.any? %>
+              <div class="field-alert">
+                <%= @reservation.errors.full_messages_for(:check_in_on).first %>
+              </div>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th><%= f.label :check_out_on, "チェックアウト", class: "form-label mandatory-field" %></th>
+          <td>
+            <%= f.date_field :check_out_on, value: @reservation.check_out_on, id: "flatpickr", placeholder: "---- / -- / --" %>
+            <% if @reservation.errors.any? %>
+              <div class="field-alert">
+                <%= @reservation.errors.full_messages_for(:check_out_on).first %>
+              </div>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th><%= f.label :num_of_people,"人数", class: "form-label mandatory-field" %></th>
+          <td>
+            <%= f.number_field :num_of_people, class: "form-control", placeholder: "0" %>
+            <% if @reservation.errors.any? %>
+              <div class="field-alert">
+                <%= @reservation.errors.full_messages_for(:num_of_people).first%>
+              </div>
+            <% end %>
+          </td>
+        </tr>
+        <%= f.hidden_field :id, value: @reservation.id %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.hidden_field :room_id, value: @reservation.room.id %>
+      </table>
+      <div class="table-btn-group">
+        <%= f.submit "変更内容を確認", class: "button1" %>
+        <%= link_to "キャンセル", :back, class: "button2"%>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

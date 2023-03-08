@@ -1,0 +1,14 @@
+<div class="content-box room-info-card">
+  <div>
+    <% if @reservation.room.image.attached? %>
+      <%= image_tag @reservation.room.image.variant(gravity: "center", resize:"581x335^", crop:"581x335+0+0").processed, class: "room-image"%>
+    <% else %>
+      <%= image_tag "default-room.png" %>
+    <% end %>
+  </div>
+  <div class="room-brief-info">
+    <p class="room-name"><%= @reservation.room.room_name %></p>
+    <p class="room-address"><%= @reservation.room.address %></p>
+    <p class="room-price"><%= converting_to_jpy(@reservation.room.price) %><span> /1泊</span></p>
+  </div>
+</div>

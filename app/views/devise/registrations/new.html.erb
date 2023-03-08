@@ -1,0 +1,49 @@
+<div class="wrapper sign-up-wrapper content-box">
+  <h2>新規登録</h2>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <div class="row g-3">
+      <div>
+        <%= f.label :name, "ユーザー名", class: "mandatory-field" %>
+        <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "ユーザー名を入力" %>
+        <% if resource.errors.any? %>
+          <div class="field-alert">
+            <%= resource.errors.full_messages_for(:name).first %>
+          </div>
+        <% end %>
+      </div>
+      <div>
+        <%= f.label :email, "メールアドレス", class: "mandatory-field" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレスを入力" %>
+        <% if resource.errors.any? %>
+          <div class="field-alert">
+            <%= resource.errors.full_messages_for(:email).first %>
+          </div>
+        <% end %>
+      </div>
+      <div>
+        <%= f.label :password, "パスワード（半角英数字6文字以上）", class: "mandatory-field" %>
+        <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワードを入力" %>
+        <% if resource.errors.any? %>
+          <div class="field-alert">
+            <%= resource.errors.full_messages_for(:password).first %>
+          </div>
+        <% end %>
+      </div>
+      <div>
+        <%= f.label :password_confirmation, class: "mandatory-field" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "確認用パスワードを入力" %>
+         <% if resource.errors.any? %>
+          <div class="field-alert">
+            <%= resource.errors.full_messages_for(:password_confirmation).first %>
+          </div>
+        <% end %>
+      </div>
+      <div>
+        <%= f.submit "新しいアカウントを作成", class: "button1" %>
+      </div>
+      <div>
+        <%= link_to "アカウントをお持ちの方はログイン", :new_user_session, class: "button2" %>
+      </div>
+    </div>
+  <% end %>
+</div>

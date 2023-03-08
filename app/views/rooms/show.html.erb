@@ -1,0 +1,75 @@
+<%= render "shared/search" %>
+<div class="wrapper">
+  <div class="room-info-btn-group">
+    <%= link_to "戻る", :back, class: "btn-to-previous-page" %>
+    <% if user_signed_in? && (current_user.id == @room.user_id) %>
+      <%= link_to "編集", [:edit_room, id:@room.id], class: "btn-to-edit" %>
+    <% end %>
+  </div>
+  <div class="row g-4 room-info-wrapper">
+    <div class="col-5">
+      <% if @room.image.attached? %>
+        <%= image_tag @room.image.variant(gravity: "center", resize:"581x335^", crop:"581x335+0+0").processed, class: "room-image"%>
+      <% else %>
+        <%= image_tag "default-room.png" %>
+      <% end %>
+    </div>
+    <div class="col-7">
+      <div class="room-detailed-info content-box">
+        <div class ="room-info-header">
+          <p class="room-name"><%= @room.room_name %></p>
+          <p class="room-price"><%= converting_to_jpy(@room.price) %><span> /1泊</span></p>
+        </div>
+        <p class="room-address"><%= @room.address %></p>
+        <p class="five-stars"> <%= image_tag "five-stars.png" %></p>
+        <p class="room-description"><%= @room.description %></p>
+        <%= form_with model: @reservation, url: :confirm_reservation, method: :get do |f| %>
+          <div class="row g-3 reservation-form">
+            <div class="col-4">
+              <%= f.label :check_in_on,"チェックイン", class: "form-label" %>
+              <%= f.date_field :check_in_on, class: "form-control", id: "flatpickr", placeholder: "---- / -- / --" %>
+              <% if @reservation.errors.any? %>
+                <div class="field-alert">
+                  <%= @reservation.errors.full_messages_for(:check_in_on).first %>
+                </div>
+              <% end %>
+            </div>
+            <div class="col-4">
+              <%= f.label :check_out_on,"チェックアウト", class: "form-label" %>
+              <%= f.date_field :check_out_on, class: "form-control", id: "flatpickr", placeholder: "---- / -- / --" %>
+              <% if @reservation.errors.any? %>
+                <div class="field-alert">
+                  <%= @reservation.errors.full_messages_for(:check_out_on).first %>
+                </div>
+              <% end %>
+            </div>
+            <div class="col-4">
+              <%= f.label :num_of_people,"人数", class: "form-label" %>
+              <%= f.number_field :num_of_people, class: "form-control", placeholder: "0" %>
+              <% if @reservation.errors.any? %>
+                <div class="field-alert">
+                  <%= @reservation.errors.full_messages_for(:num_of_people).first %>
+                </div>
+              <% end %>
+            </div>
+            <%= f.hidden_field :id, value: @reservation.id %>
+            <%= f.hidden_field :room_id, value: @room.id %>
+            <% if user_signed_in? %>
+              <%= f.hidden_field :user_id, value: current_user.id %>
+            <% end %>
+            <div class="col-12">
+              <%= f.submit "予約へ進む", class: "button1" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if flash[:notice] %>
+  <p class="alert alert-primary">
+    <%= flash[:notice] %>
+    <button type="button" class="close" data-bs-dismiss="alert">&times;</button>
+  </p>
+<% end %>

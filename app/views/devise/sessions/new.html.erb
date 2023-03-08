@@ -1,0 +1,29 @@
+<div class="wrapper sign-in-wrapper content-box">
+  <h2>サインイン</h2>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="row g-4">
+      <div>
+        <%= f.label :email, "メールアドレス" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレスを入力" %>
+      </div>
+      <div>
+        <%= f.label :password, "パスワード" %>
+        <%= f.password_field :password, autocomplete: "current-password", placeholder: "パスワードを入力" %>
+      </div>
+      <div>
+        <%= f.submit "サインイン", class: "button1" %>
+      </div>
+      <div>
+        <%= link_to "新しいアカウントを作成", :new_user_registration, class: "button2" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<% if flash[:alert] %>
+  <p class="alert alert-danger">
+    <%= alert %>
+    <button type="button" class="close" data-bs-dismiss="alert">&times;</button>
+  </p>
+<% end %>
+

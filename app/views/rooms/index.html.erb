@@ -1,0 +1,77 @@
+<div class="wrapper index-wrapper">
+  <h2>掲載中の施設</h2>
+  <% @rooms.each do |room| %>
+    <div class="content-box index-item">
+      <%= link_to [:room, id: room.id] do %>
+        <% if room.image.attached? %>
+          <%= image_tag room.image.variant(gravity: "center", resize:"581x335^", crop:"581x335+0+0").processed, class: "room-image"%>
+        <% else %>
+          <%= image_tag "default-room.png" %>
+        <% end %>
+      <% end %>
+      <div class="index-info-container">
+        <div class="index-header">
+          <%= link_to "#{room.room_name}", [:room, id: room.id], class: "room-name" %>
+          <div class="index-nav">
+            <span>登録日: <%= room.updated_at.strftime("%Y/%m/%d") %></span>
+            <div class="btn-group">
+              <button type="button" class="index-dropdown dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"></button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <button class="dropdown-item"><%= link_to "編集", [:edit_room, id:room.id] %></button>
+                </li>
+                <li>
+                  <button class="dropdown-item btn-delete" data-bs-toggle="modal" data-bs-target="#room-modal-<%= room.id %>">施設を削除</button>
+                </li>
+              </ul>
+              <div class="modal fade" id="room-modal-<%= room.id %>" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h3 class="modal-title">こちらの施設を削除しますか？</h3>
+                    </div>
+                    <div class="modal-body">
+                      <div class="modal-room-info">
+                        <div>
+                          <% if room.image.attached? %>
+                            <%= image_tag room.image.variant(gravity: "center", resize:"581x335^", crop:"581x335+0+0").processed, class: "room-image"%>
+                          <% else %>
+                            <%= image_tag "default-room.png" %>
+                          <% end %>
+                        </div>
+                        <div>
+                          <p class="room-name"><%= room.room_name %></p>
+                          <p><%= converting_to_jpy(room.price) %><span> /1泊</span></p>
+                        </div>
+                      </div>
+                      <p class="modal-instruction">よろしければ以下の「施設を削除」を押してください</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="button2" data-bs-dismiss="modal">キャンセル</button>
+                      <%= link_to "施設を削除", room, method: :delete, class: "button1" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row index-body">
+          <div class="col-9">
+            <p class="room-description"><%= room.description %></p>
+          </div>
+          <div class="col-3">
+            <p class="room-price"><%= converting_to_jpy(room.price) %><span> /1泊</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<% if flash[:notice] %>
+  <p class="alert alert-primary">
+    <%= flash[:notice] %>
+    <button type="button" class="close" data-bs-dismiss="alert">&times;</button>
+  </p>
+<% end %>
